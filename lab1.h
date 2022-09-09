@@ -6,17 +6,17 @@
 using namespace std;
 namespace lab1
 {
-    struct elemPos
+    /*struct elemPos
     {
         int element;
         int position;
-    };
+    };*/
 
     struct line
     {
         int size;              // number of digits per line
-        int* number;        // pushed number in line
-        elemPos* array;     // array for non-zero elements
+        int* element;
+        int* position;
     };
 
     struct matrix
@@ -33,6 +33,18 @@ namespace lab1
             return -1;
 
         return 1;
+    }
+
+    template <class T>
+    T* getCapacity(T* a, int n)
+    {
+        T* b = new T[n + 1];
+        T* tmp = b;
+        for (int i = 0; i < n; i++)
+            tmp[i] = a[i];
+
+        delete[] a;
+        return b;
     }
 
 

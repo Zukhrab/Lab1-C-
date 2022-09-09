@@ -12,11 +12,17 @@ using namespace lab1;
 
 int main()
 {
-    matrix Mt1, Mt2;
-    Mt1 = { 0, 0, nullptr };
-    Mt2 = { 0, 0, nullptr };
+    matrix matrix1, matrix2;
+    
+    matrix1 = { 0, 0, nullptr };
+    matrix2 = { 0, 0, nullptr };
 
-    if (input(&Mt1))
+    input(&matrix1);
+    output("Input\n", &matrix1);
+    //modified(&matrix1, &matrix2);
+    //output("Output\n", &matrix2);
+    erase(&matrix1);
+    erase(&matrix2);
 
     return 0;
 }
