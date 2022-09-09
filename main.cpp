@@ -18,11 +18,12 @@ int main()
     matrix2 = { 0, 0, nullptr };
 
     input(&matrix1);
-    output("Input\n", &matrix1);
+    output("\nInput", &matrix1);
     //modified(&matrix1, &matrix2);
     //output("Output\n", &matrix2);
-    erase(&matrix1);
-    erase(&matrix2);
-
+    //erase(&matrix1);
+    //erase(&matrix2);
+    getchar();
+    //cout << "";
     return 0;
 }

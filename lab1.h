@@ -1,17 +1,10 @@
 #ifndef LAB1
 #define LAB1
-
 #include <iostream>
 
 using namespace std;
 namespace lab1
 {
-    /*struct elemPos
-    {
-        int element;
-        int position;
-    };*/
-
     struct line
     {
         int size;              // number of digits per line

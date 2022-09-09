@@ -1,11 +1,13 @@
 #include "lab1.h"
 
+using namespace std;
 namespace lab1
 {
     matrix* input(matrix* _mt)
     {
         const char* emessage = "";
         int m, n;                       // number lines and columns
+        //int i;
 
         do
         {
@@ -36,13 +38,12 @@ namespace lab1
             return nullptr;
         }
 
-        for (int i = 0; i < m; i++)
+        for (int i = 0; i < m; )
         {
             try
             {
                 _mt->Line[i].element = new int [1];
                 _mt->Line[i].position = new int[1];
-
             }
             catch (bad_alloc& ba)
             {
@@ -51,6 +52,7 @@ namespace lab1
 
                 return nullptr;
             }
+
             cout << "Enter element for matrix line number " << (i + 1) << " --> " << endl;
             int k = 0;          // for getCapacity()
 
@@ -72,6 +74,7 @@ namespace lab1
                 }
             }
             _mt->Line[i].size = k;
+            i++;
         }
 
         return _mt;
@@ -93,7 +96,7 @@ namespace lab1
         int count;
         int i, j = 0;
        
-
+        cout << msg << endl;
         for (i = 0; i < _mt->m; i++)
         {
             for (count = 0; count < _mt->Line[i].size; count++)
@@ -101,11 +104,50 @@ namespace lab1
             cout << endl;
         }
     }
+
     void erase(matrix* _mt)
     {
         for (int i = 0; i < _mt->m; i++)
             delete[] _mt->Line[i].element;
 
-        delete _mt->Line;
+        delete[] _mt->Line;
+    }
+
+    int maximum(int* arr, int size)
+    {
+        int max;
+        max = arr[0];
+        for (int i = 0; i < size; i++)
+        {
+            if (arr[i] > max)
+            {
+                max = arr[i];
+            }
+        }
+        return max;
+    }
+
+    int maxInLine(int* array)
+    {
+        int i, j, result;
+        int replay = 0;
+
+        int sizeArray = (sizeof  array);
+        sizeArray = sizeArray / 4;
+
+        int* massive = new int[sizeArray];
+
+        for (i = 0; i < sizeArray; i++)
+        {
+            for (j = 0; j < sizeArray; j++)
+                if (array[i] == array[j])
+                    replay++;
+            massive[i] = replay;
+            replay = 0;
+        }
+
+        result = maximum(massive, sizeArray);
+
+        return result;
     }
 }
