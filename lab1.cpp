@@ -7,7 +7,6 @@ namespace lab1
     {
         const char* emessage = "";
         int m, n;                       // number lines and columns
-        //int i;
 
         do
         {
@@ -21,6 +20,7 @@ namespace lab1
             cout << "Enter number of columns" << endl;
             if (getInt(n) < 1)
                 return nullptr;
+
         } while (m < 1);
 
         _mt->m = m;
@@ -38,7 +38,7 @@ namespace lab1
             return nullptr;
         }
 
-        for (int i = 0; i < m; )
+        for (int i = 0; i < m; i++)
         {
             try
             {
@@ -66,37 +66,61 @@ namespace lab1
                 }
                 if (a != 0)
                 {
-                    _mt->Line->element = getCapacity(_mt->Line[i].element, k);
-                    _mt->Line->position = getCapacity(_mt->Line[i].position, k);
+                    _mt->Line[i].element = getCapacity(_mt->Line[i].element, k);
+                    _mt->Line[i].position = getCapacity(_mt->Line[i].position, k);
                     _mt->Line[i].element[k] = a;
                     _mt->Line[i].position[k] = j;
                     k++;
                 }
             }
             _mt->Line[i].size = k;
-            i++;
         }
 
         return _mt;
     }
 
-    /*matrix* modified(matrix* _mt1, matrix* _mt2)
+    matrix* modified(matrix* _mt1, matrix* _mt2)
     {
+        int i, j;
         int count, lineNum = 0;
-        int resNumber, reply = 0;
-        for (count = 0; _mt1->Line[lineNum].element[count]; count++)
+        int resNumberIndex, reply = 0;
+
+        int* arr = new int[_mt1->m];
+        
+        for (count = 0; count < _mt1->m; count++)
+            for (i = 0; i < _mt1->Line[count].size; i++)
+            {
+                resNumberIndex = maxInLine(_mt1->Line[count].element, _mt1->Line[count].size);
+                arr[count] = _mt1->Line[count].element[resNumberIndex];
+            }
+
+        try
         {
-            resNumber = _mt->Line[lineNum].element[count];
-            if (resNumber == )
+            _mt2->Line = new line[_mt1->m];
         }
-    }*/
+        catch (bad_alloc& ba)
+        {
+            cout << "Too many rows !" << ba.what() << endl;
+            erase(_mt2);
+
+            return nullptr;
+        }
+
+        _mt2->Line->element = arr;
+        _mt2->Line->position = nullptr;
+        _mt2->Line->size = _mt1->m;
+        _mt2->m = 1;
+        _mt2->n = _mt1->m;
+
+        return _mt2;
+    }
 
     void output(const char* msg, matrix* _mt)
     {
         int count;
         int i, j = 0;
        
-        cout << msg << endl;
+        cout << endl << msg << endl;
         for (i = 0; i < _mt->m; i++)
         {
             for (count = 0; count < _mt->Line[i].size; count++)
@@ -118,35 +142,37 @@ namespace lab1
         int max;
         max = arr[0];
         for (int i = 0; i < size; i++)
-        {
             if (arr[i] > max)
-            {
                 max = arr[i];
-            }
-        }
+
         return max;
     }
 
-    int maxInLine(int* array)
+    int maxInLine(int* line, int lineSize)
     {
         int i, j, result;
-        int replay = 0;
+        int reply = 0;
 
-        int sizeArray = (sizeof  array);
-        sizeArray = sizeArray / 4;
+        int* massive = new int[lineSize];
 
-        int* massive = new int[sizeArray];
-
-        for (i = 0; i < sizeArray; i++)
+        for (i = 0; i < lineSize; i++)
         {
-            for (j = 0; j < sizeArray; j++)
-                if (array[i] == array[j])
-                    replay++;
-            massive[i] = replay;
-            replay = 0;
+            for (j = 0; j < lineSize; j++)
+            {
+                if (line[i] == line[j])
+                    reply++;
+              
+                massive[i] = reply;
+                reply = 0;
+            }
         }
+        result = maximum(massive, lineSize);
+        
+        i = 0;
+        while (result != massive[i])
+            i++;
 
-        result = maximum(massive, sizeArray);
+        result = i;
 
         return result;
     }

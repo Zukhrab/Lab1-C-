@@ -40,11 +40,12 @@ namespace lab1
         return b;
     }
 
-
     matrix* input(matrix* _mt);
     void output(const char* msg, matrix* _mt);
     void erase(matrix* _mt);
     matrix* modified(matrix* _mt1, matrix* _mt2);
+    int maxInLine(int* line, int lineSize);
+    int maximum(int* arr, int size);
 }
 
 #endif
