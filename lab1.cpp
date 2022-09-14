@@ -81,7 +81,7 @@ namespace lab1
 
     matrix* modified(matrix* _mt1, matrix* _mt2)
     {
-        int i, j;
+        int i;
         int count, lineNum = 0;
         int resNumberIndex, reply = 0;
 
@@ -158,13 +158,11 @@ namespace lab1
         for (i = 0; i < lineSize; i++)
         {
             for (j = 0; j < lineSize; j++)
-            {
                 if (line[i] == line[j])
                     reply++;
-              
-                massive[i] = reply;
-                reply = 0;
-            }
+
+            massive[i] = reply;
+            reply = 0;
         }
         result = maximum(massive, lineSize);
         
